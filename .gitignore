@@ -23,6 +23,8 @@
 *.out
 *.synctex.gz
 *.bak
+*.pdf
+*.odt
 ## Project information from Eclipse
 *.project
 *.pydevproject
