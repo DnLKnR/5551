@@ -31,39 +31,27 @@ A New Approach for Object Recognition Engine in Robotics
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
+This paper is a proposal detailing how my group plans to build and program a robot to play Air Hockey, including problem description, motivation, and related work. We hope to build this Air Hockey robot through the use of computer vision, robotic mechanisms and artificial intelligence. The robot will be constructed using stepper motors to create a two dimensional translational workspace on the robot’s half of the Air Hockey table, and will have a camera centered on its available play area. This project will primarily be used to gain an understanding of the underlying principles. There are many papers covering a variety of robot arms used and different ways to determine the hockey puck position and velocity.
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-3D point cloud data provided by low-cost RGB-D sensors \cite{kinect}, has
-allowed for the collection of feature rich datasets. These widely available
-sensors provide synchronized color and depth images and are increasingly being
-used in robotic applications such as object detection and classification.
-Although these datasets have opened new avenues of research, it remains
-undetermined as to which feature descriptors and machine learning classifiers
-provide optimal object recognition performance. 
+Improvement in both robotic mechanisms and computer vision has allowed for the production of reactionary robots based in interpretation of surroundings.  The combination of these fields allow for a variety of specialized robotics, varying from robotic drones \cite{3dr} with ground recognition to self-driving cars \cite{googlecar}.  Artificial Intelligence is often the transitional layer between these two fields, which allows for reactionary response from the robotic mechanism in a changing environment.  One example of this would automated assembly systems, where computer-vision object-recognition an order to use a robotic manipulator to grasp and transport said object.
 
-The remainder of this paper is organized as follows. Related work is mentioned 
-in Section \ref{sec:related_work}. In Section \ref{sec:problem_statement}, we
-state the problem and provide our solution. Experimental results are presented
-and discussed in \ref{sec:experimental_results}. We conclude in 
-Section \ref{sec:conclusion} with an outlook of ongoing and future work.
+Our project will use the combination of computer vision, robotic mechanisms, and artificial intelligence an order to complete the task of producing an Air Hockey playing robot.  As discussed in the previous paragraph, the artificial intelligence will be in the key transitional level between the interpretation of computer vision images and the adjusting of the robotic manipulator.  The computer vision part of our project will introduce the reactionary component to our system.  The robotic mechanism will allow for response component.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Related Work}
-\label{sec:related_work}
+\section{Problem Description}
+\label{sec:problem_description}
+\subsection{Definition of Problem}
+With recent advances in computer processing and affordability, computers and robotics are increasingly used for recreational tasks. We wish to explore the possibility of constructing a robotic system to play Air Hockey, a simple two-dimensional game in real space. By combining computer vision, robotic mechanisms, and A.I. algorithms, a Hockey playing robot can be implemented with a goal-oriented approach to allow the robotic system to react to a human opponent’s actions and quickly derive a solution. The setup will require an overhead camera which monitors the puck movement and robotic manipulator with the end effector being the opponent who we face. The manipulator will be ported onto the workspace, being the air hockey field. The camera will track the puck movement in a two dimensional plane and the data will get fed to the processing software which will compute the optimal solution and send commands to the robotic manipulator. The end effector will thus be controlled through a combination of robotic mechanisms in a reactionary setting.
+\subsection{Motivation}
+Computer Vision is widely used today with its applications ranging from traffic control\cite{aliane} to gesture recognition \cite{bhame}. Our primary motivation is to grasp an understanding of how we use computer vision. Computer Vision is a tool used in robotics to process and understand images from the real word.The robotic system takes in this image data and performs selective tasks based on the algorithms and functions written within the system. Our secondary motivation is to learn how we interface between the the two different categorical hardware and combining them through a software layer. This will enable us develop skills in building and programming robots which is the resultant goal this project. Finally, we also desire to increase understanding about the  significance of robotic precision. Since the system response needs to be almost instantaneous, the robotic hardware needs to be efficient, quick and accurate with minimal margin for error. Therefore we will design hardware which will execute these tasks in the most optimal and precise manner.
+\subsection{Related Work}
+There has been a  lot of work in the area of Air Hockey robotic systems, One approach for the physical system is to restrict motion to one axis of translation, and use a linear actuator to hit the puck back \cite{marra}. Another method is to have two connected rotating arms to control the puck \cite{bishop}. For robotic behaviors, it’s possible to have the robot change its play style based on how it’s human opponent plays \cite{namiki}. A group in Iran have a system to automatically calibrate the table’s intrinsic parameters for different table setups \cite{alizadeh}. Additionally, work has been done to consider the interaction between a puck and the paddle hitting it, and what such forces mean for the motion of the puck \cite{ghazvini} \cite{iguchi}. Another paper covers predicting where the puck will be over time and fuzzy logic control \cite{wang}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Problem Statement}
-\label{sec:problem_statement}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Experimental Results}
-\label{sec:experimental_results}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusion and Future Outlook}
-\label{sec:conclusion}
+SIFT feature matching is an important part of image processing and will likely be used to track the puck and possibly the robotic manipulator position and velocity. Because motion requires more than one frame, velocity will be determined through the comparison of two image feature matches (ying?) \cite{rahman}. However, if SIFT feature matching proves too slow for our purposes, there are alternatives involving thresholding and trying to match shapes \cite{wang} \cite{marra} \cite{bishop}.
+\subsection{Tasks/Timeline}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{IEEEtran}
