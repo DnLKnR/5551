@@ -12,13 +12,14 @@
 \usepackage{rotating}
 \usepackage{verbatim}
 \usepackage[caption=false,font=footnotesize,subrefformat=parens,labelformat=parens]{subfig}
-
+\graphicspath{{graphics/}}
+\DeclareGraphicsExtensions{.png}
 \title{\bf
-A New Approach for Object Recognition Engine in Robotics
+Air-Hockey Robot
 }
 
-\author{\parbox{5 in}{\centering Susan Jones and Robert Smith}\\
-  {\tt\small \{sjones, rsmith\}@cs.umn.edu}\\
+\author{\parbox{5 in}{\centering Daniel Koniar, Matthew Russell, and Steve Thomas}\\
+  {\tt\small \{konia013, russe546, thom5159\}@umn.edu}\\
   Department of Computer Science and Engineering\\
   University of Minnesota\\
   Minneapolis, MN 55455\\
@@ -52,7 +53,68 @@ There has been a  lot of work in the area of Air Hockey robotic systems, One app
 
 SIFT feature matching is an important part of image processing and will likely be used to track the puck and possibly the robotic manipulator position and velocity. Because motion requires more than one frame, velocity will be determined through the comparison of two image feature matches (ying?) \cite{rahman}. However, if SIFT feature matching proves too slow for our purposes, there are alternatives involving thresholding and trying to match shapes \cite{wang} \cite{marra} \cite{bishop}.
 \subsection{Tasks/Timeline}
-
+\begin{itemize}
+\item Construct Design Outline
+\begin{itemize}
+\item See \ref{fig_1}, \ref{fig_2}, and \ref{fig_3}.
+\end{itemize}
+\item Outline Hardware Requirements
+\begin{itemize}
+\item Billing for materials
+\end{itemize}
+\item Obtain Hardware
+\begin{itemize}
+\item Order and construct parts
+\end{itemize}
+\item Learn how to interface with the hardware components (Firmware)
+\item Start constructing software layer for the handling of hardware components
+\begin{itemize}
+\item Dealing with output from camera
+\item Dealing with input into robotic mechanism
+\end{itemize}
+\item Start using the computer vision parsing software and the robotic manipulator controller software layers.
+\begin{itemize}
+\item Computer vision software will most likely be OpenCV \cite{opencv} (C++)
+\item Robotic manipulator software will most likely be ROS \cite{ros} (C++)
+\end{itemize}
+\item Start creating transitional data-processing software layer (between hardware-handling software layers)
+\begin{itemize}
+\item This will connect the computer vision and robotic mechanism software layers.
+\item Note: It may be only a single piece of software for the totality of layers, but modularity will still need to be present between each individual “layer” of software. Thus, the term “layer” is used to symbolize this key component.
+\item A.I. (will be done in the transitional software layer)
+\begin{itemize}
+\item Defensive A.I. algorithms/strategies
+\item Offensive A.I. algorithms/strategies
+\end{itemize}
+\item Creating differing difficulty levels for A.I.
+\end{itemize}
+\item Testing and Data Collection
+\begin{itemize}
+\item Tweaks to implementation can be made here.
+\end{itemize}
+\item Analysis and Final Report
+\end{itemize}
+\begin{figure}[!h]
+\centering
+\subfloat{\includegraphics[height=4cm, width=7cm]{PPD-FCF}%
+\label{PPD-FCF}}
+\caption{Functional Component Overview.}
+\label{fig_1}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat{\includegraphics[height=4.5cm, width=6cm]{PPD-DPS}%
+\label{PPD-DPS}}
+\caption{Functional Components of Data-Processing Software.}
+\label{fig_2}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat{\includegraphics[height=6cm, width=6.5cm]{5551process}%
+\label{5551process}}
+\caption{Bidirectional BFS results to solve Tower of Hanoi.}
+\label{fig_3}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,project}
