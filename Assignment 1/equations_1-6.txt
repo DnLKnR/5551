@@ -1,0 +1,97 @@
+{T}lsup{1}lsub{6} = left[matrix{
+ r_{11}lsup{1} # r_{12}lsup{1} # r_{13}lsup{1} # p_{x}lsup{1} ##
+ r_{21}lsup{1} # r_{22}lsup{1} # r_{23}lsup{1} # p_{y}lsup{1} ##
+ r_{31}lsup{1} # r_{32}lsup{1} # r_{33}lsup{1} # p_{z}lsup{1} ##
+ 0      # 0      # 0      # 1      }right]
+newline
+matrix{alignl 
+r_{11}lsup{1} = c_2 c_4 c_5 c_6 `- c_2 s_4 s_6 + c_4 s_2 s_5
+#
+alignl 
+r_{21}lsup{1} = c_2 s_5 c_6 `- c_5 s_2
+##  
+alignl   
+r_{31}lsup{1} = `-c_2 c_5 c_6 s_4 `- c_2 c_4 s_6 `- s_2 s_4 s_5
+#    
+alignl 
+r_{12}lsup{1} = `-s_2 c_4 c_5 c_6 + s_2 s_4 s_6 + c_2 c_4 s_5       
+##
+alignl 
+r_{22}lsup{1} = `-s_2 s_5 c_6 `- c_2 c_5
+#
+alignl 
+r_{32}lsup{1} = s_2 s_4 c_5 c_6 + s_2 s_6 c_4 `- c_2 s_4 s_5
+##
+alignl 
+r_{13}lsup{1} = `-c_4 c_5 s_6 `- s_4 c_6
+#
+alignl 
+r_{23}lsup{1} = `-s_5 s_6
+##
+alignl 
+r_{33}lsup{1} = s_4 c_5 s_6 `- c_4 c_6
+#
+alignl 
+p_{x}lsup{1} = c_2 c_4 c_5 c_6 a_2 `- c_2 s_4 s_6 a_2 `- c_4 c_5 s_6 d_3 `- s_4 c_6 d_3 + s_2 s_5 c_4 a_2 + a_3
+##
+alignl 
+p_{y}lsup{1} = c_2 c_6 s_5 a_2 `- s_5 s_6 d_3 `- s_2 c_5 a_2 + d_4
+#
+alignl    
+p_{z}lsup{1} = `-c_2 c_5 c_6 s_4 a_2 `- c_2 c_4 s_6 a_2 + s_4 s_6 c_5 d_3 `- c_4 c_6 d_3 `- s_2 s_4 s_5 a_2
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{T}lsup{0}lsub{6} = {T}lsup{0}lsub{1}{T}lsup{1}lsub{6} = 
+left[matrix{
+ c %theta_1 # -s %theta_1 # 0 # 0 ##
+ s %theta_1 # c %theta_1  # 0 # 0 ##
+ 0          # 0           # 1 # 0 ##
+ 0          # 0           # 0 # 1 }right]
+left[matrix{
+ r_{11}lsup{1} # r_{12}lsup{1} # r_{13}lsup{1} # p_{x}lsup{1} ##
+ r_{21}lsup{1} # r_{22}lsup{1} # r_{23}lsup{1} # p_{y}lsup{1} ##
+ r_{31}lsup{1} # r_{32}lsup{1} # r_{33}lsup{1} # p_{z}lsup{1} ##
+ 0      # 0      # 0      # 1      }right] =
+ left[matrix{
+ c %theta_1 r_{11}lsup{1} - s %theta_1 r_{21}lsup{1}
+ # 
+ c %theta_1 r_{12}lsup{1} - s %theta_1 r_{22}lsup{1} 
+ # 
+ c %theta_1 r_{13}lsup{1} - s %theta_1 r_{23}lsup{1}
+ # 
+ c %theta_1 p_{x}lsup{1} - s %theta_1 p_{y}lsup{1}
+ ##
+ s %theta_1 r_{11}lsup{1} + c %theta_1 r_{21}lsup{1}
+ # 
+ s %theta_1 r_{12}lsup{1} + c %theta_1 r_{22}lsup{1} 
+ # 
+ s %theta_1 r_{13}lsup{1} + c %theta_1 r_{23}lsup{1} 
+ # 
+ s %theta_1 p_{x}lsup{1} + c %theta_1 p_{y}lsup{1}
+ ## r_{31}lsup{1} # r_{32}lsup{1} # r_{33}lsup{1} # p_{z}lsup{1}
+ ## 0      # 0      # 0      # 1    }right]
+ newline
