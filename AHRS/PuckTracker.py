@@ -346,6 +346,20 @@ class PuckTracker:
                 break
         cv2.destroyAllWindows()
     
-    
-PuckTracker().test_time()
+    def test_colorspace_loop(self):
+        while 1:
+            ret, frame = self.cap.read()
+            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            lower_color = np.array([0,0,0]) #black
+            upper_color = np.array([128,128,128]) #grey
+            mask = cv2.inRange(hsv, lower_color, upper_color)
+            res  = cv2.bitwise_and(frame,frame, mask=mask)
+            cv2.imshow('Mask Image', mask)
+            cv2.imshow('Res Image', res)
+            k = cv2.waitKey(60) & 0xFF
+            if k == 27:  #ESC key to exit
+                break
+        cv2.destroyAllWindows()
+           
+PuckTracker().test_colorspace_loop()
 
