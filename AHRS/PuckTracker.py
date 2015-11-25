@@ -7,6 +7,7 @@ class PuckTracker:
     def __init__(self, height=320, width=240, template='Puck'):
         self.template = cv2.imread('templates/' + template + '.png',0)
         self.cap = cv2.VideoCapture(0)
+        cv2.useOptimized()
         self.cap.set(3, height)
         self.cap.set(4, width)
         
@@ -17,7 +18,16 @@ class PuckTracker:
         ## compute center coordinates
         ## return (x, y)
         pass
-      
+    
+    def color_RGB2HSV(self,RGB):
+        BGR = [RGB[1],RGB[2],RGB[0]]
+        BGR = list(reversed(RGB))
+        HSV = cv2.cvtColor(np.uint8([[BGR]]),cv2.COLOR_BGR2HSV)
+        print(HSV)
+        return HSV[0][0]
+    
+    def color_RGB2GBR(self,RGB):
+        return [RGB[1],RGB[2],RGB[0]]
     
     def test_templatematching_loop(self):
         i = 2
@@ -347,11 +357,11 @@ class PuckTracker:
         cv2.destroyAllWindows()
     
     def test_colorspace_loop(self):
+        lower_color = np.array([0,0,0]) #black
+        upper_color = np.array([128,128,128]) #grey
         while 1:
             ret, frame = self.cap.read()
             hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            lower_color = np.array([0,0,0]) #black
-            upper_color = np.array([128,128,128]) #grey
             mask = cv2.inRange(hsv, lower_color, upper_color)
             res  = cv2.bitwise_and(frame,frame, mask=mask)
             cv2.imshow('Mask Image', mask)
@@ -360,6 +370,75 @@ class PuckTracker:
             if k == 27:  #ESC key to exit
                 break
         cv2.destroyAllWindows()
+        
+    def test_diff_loop(self):
+        ret, base = self.cap.read()
+        #base = cv2.cvtColor(base, cv2.COLOR_BGR2HSV)
+        while 1:
+            ret, frame = self.cap.read()
+            #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            diff = cv2.subtract(frame, base)
+            cv2.imshow('Difference', diff)
+            k = cv2.waitKey(60) & 0xFF
+            if k == 27:  #ESC key to exit
+                break
+                
+        cv2.destroyAllWindows()
+    
+    def test_diffbitwise_loop(self):
+        ret, base = self.cap.read()
+        #base = cv2.cvtColor(base, cv2.COLOR_BGR2HSV)
+        while 1:
+            ret, frame = self.cap.read()
+            #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            diff = cv2.bitwise_and(frame, base)
+            cv2.imshow('Difference', diff)
+            k = cv2.waitKey(60) & 0xFF
+            if k == 27:  #ESC key to exit
+                break
+                
+        cv2.destroyAllWindows()
+        
+    def test_diffmask_loop(self):
+        lower_color = np.array([61,0,0]) #maroon
+        upper_color = np.array([255,25,0]) #light red
+        ret, base = self.cap.read()
+        hsv = cv2.cvtColor(base, cv2.COLOR_BGR2HSV)
+        mask = cv2.inRange(hsv, lower_color, upper_color)
+        res1  = cv2.bitwise_and(base,base, mask=mask)
+        while 1:
+            ret, frame = self.cap.read()
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            mask = cv2.inRange(frame, lower_color, upper_color)
+            res2  = cv2.bitwise_and(frame,frame, mask=mask)
+            diff = cv2.subtract(res1, res2)
+            cv2.imshow('Difference with Mask', diff)
+            k = cv2.waitKey(60) & 0xFF
+            if k == 27:  #ESC key to exit
+                break
+                
+        cv2.destroyAllWindows()
+    
+    def test_mask_loop(self):
+        color_1 = self.color_RGB2HSV([128,0,0])
+        color_2 = self.color_RGB2HSV([250,128,114])
+        #color_1 = self.color_RGB2GBR([34,0,255])
+        #color_2 = self.color_RGB2GBR([176,25,25])
+        lower_color = np.array(color_1) #red
+        upper_color = np.array(color_2) #light red
+        while 1:
+            ret, frame = self.cap.read()
+            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            mask = cv2.inRange(hsv, lower_color, upper_color)
+            #res  = cv2.bitwise_and(frame,frame, mask=mask)
+            cv2.imshow('HSV',hsv)
+            cv2.imshow('Mask Image', mask)
+            cv2.imshow('Frame', frame)
+            #cv2.imshow('Res Image', res)
+            k = cv2.waitKey(1) & 0xFF
+            if k == 27:  #ESC key to exit
+                break
+        cv2.destroyAllWindows()
            
-PuckTracker().test_colorspace_loop()
+PuckTracker().test_mask_loop()
 
