@@ -11,7 +11,7 @@ if __name__ == '__main__':
     #get default vals
     _, frame = cap.read()
     h, w, c = frame.shape # height, width, channels
-    dims = (w/4, h/4)
+    dims = (int(w/4), int(h/4))
     print(dims)
 
     # define range of colors in HSV
@@ -58,7 +58,7 @@ if __name__ == '__main__':
         for a in range(0, len(masks)):
             m = masks[a]
             # find contours in the threshold image
-            _, contours, _ = cv2.findContours(m,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+            contours, _ = cv2.findContours(m,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
 
             # finding contour with maximum area and store it as best_cnt
             max_area = 0
