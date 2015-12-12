@@ -12,6 +12,7 @@ if __name__ == '__main__':
     _, frame = cap.read()
     h, w, c = frame.shape # height, width, channels
     dims = (w/4, h/4)
+    print(dims)
 
     # define range of colors in HSV
     lower_yellow = np.array([10, 50, 10])
@@ -57,7 +58,7 @@ if __name__ == '__main__':
         for a in range(0, len(masks)):
             m = masks[a]
             # find contours in the threshold image
-            contours, _ = cv2.findContours(m,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+            _, contours, _ = cv2.findContours(m,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
 
             # finding contour with maximum area and store it as best_cnt
             max_area = 0
@@ -92,7 +93,7 @@ if __name__ == '__main__':
                 cv2.circle(frame, (x, blue_pos[1]), 3, (0, 0, 255), -1)
 
         if showColorBlobs:
-            try:
+            try: 
                 cv2.line(frame, yellow_pos, yellow_prev_pos, (0, 255, 255))
             except Exception:
                 pass
@@ -110,3 +111,6 @@ if __name__ == '__main__':
             break
 
     cv2.destroyAllWindows()
+
+
+
