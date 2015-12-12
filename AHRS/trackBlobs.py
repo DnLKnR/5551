@@ -58,7 +58,7 @@ if __name__ == '__main__':
         for a in range(0, len(masks)):
             m = masks[a]
             # find contours in the threshold image
-            contours, _ = cv2.findContours(m,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+            _, contours, _ = cv2.findContours(m,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
 
             # finding contour with maximum area and store it as best_cnt
             max_area = 0
