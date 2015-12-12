@@ -90,7 +90,7 @@ if __name__ == '__main__':
             # if puck is coming towards me, move to intercept
             if yellow_speed[1] < 0:
                 x = yellow_pos[0]+yellow_speed[0]*(blue_pos[1]-yellow_pos[1])/yellow_speed[1]
-                cv2.circle(frame, (x, blue_pos[1]), 3, (0, 0, 255), -1)
+                cv2.circle(frame, (int(x), blue_pos[1]), 3, (0, 0, 255), -1)
 
         if showColorBlobs:
             try: 
