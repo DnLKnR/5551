@@ -109,7 +109,47 @@ The position of the origin of link 2 for an RP manipulator is given by
 \]
 Give the \(2 \times 2\) Jacobian that relates the two joint rates to the linear velocity of the origin of frame {2}. Give a value of \(\Theta\) where the device is at a singularity.
 \subsubsection*{Answer}
-
+To compute the Jacobian matrix, we need to obtain the derived angular and linear components of \(\tensor*[^{0}]{P}{_{2ORG}}\) with respects to \(\dot{\theta}\) and \(\dot{d}\), respectively.  To do this, we derive for \({d}\over{d\theta}\) to find \(\omega\) and for \({d}\over{dd}\) to find \(v\), which produces the following (Note: The Z-component is removed since the manipulator only contains 2-DOF):
+\[
+\tensor*[^{0}]{\omega}{_{2}} =
+\begin{bmatrix}
+    -\dot{\theta}a_{1}s_{1} - \dot{\theta}d_{2}c_{1}     \\
+    \dot{\theta}a_{1}c_{1} - \dot{\theta}d_{2}s_{1}
+\end{bmatrix},
+\tensor*[^{0}]{v}{_{2}} =
+\begin{bmatrix}
+    - \dot{d}_{2}s_{1}     \\
+    \dot{d}_{2}c_{1}
+\end{bmatrix}
+\]
+Now, to get the \(2 \times 2\) Jacobian matrix, we stack the transposed components with \(\dot{\theta}\) and \(\dot{d}\) factored out, producing:
+\[
+J =
+\begin{bmatrix}
+    \tensor*[^{0}]{\omega}{^{T}_{2}}  \over {\dot{\theta}_{1}}   \\
+    \tensor*[^{0}]{v}{^{T}_{2}} \over \dot{d}_{2}
+\end{bmatrix} =
+\begin{bmatrix}
+    -a_{1}s_{1} - d_{2}c_{1} &  a_{1}c_{1} - d_{2}s_{1}  \\
+    -s_{1} 					 & c_{1}
+\end{bmatrix}
+\]
+To compute the singularities, we use Equation (5.73) on p.152 in \cite{textbook}, which is as follows:
+\[DET[J(\Theta)] = 0\]
+Thus, we compute the determinant of the \(2 \times 2\) Jacobian matrix, set it equal to 0, and solve for each value, seen in the following:
+\[
+-c_{1}^2d_{2} - a_{1}s_{1}c_{1} + a_{1}s_{1}c_{1} - d_{2}s_{1}^2 = 0
+\]
+\[
+-d_{2}(c_{1}^2 + s_{1}^2) = 0
+\]
+\[
+-d_{2} = 0
+\]
+Thus, a singularity exists in the RP Manipulator when the following is true:
+\[
+d_{2} = 0
+\]
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Problem 2}
