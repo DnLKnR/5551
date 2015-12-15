@@ -122,16 +122,16 @@ To compute the Jacobian matrix, we need to obtain the derived angular and linear
     \dot{d}_{2}c_{1}
 \end{bmatrix}
 \]
-Now, to get the \(2 \times 2\) Jacobian matrix, we stack the transposed components with \(\dot{\theta}\) and \(\dot{d}\) factored out, producing:
+Now, to get the \(2 \times 2\) Jacobian matrix, we side stack the components with \(\dot{\theta}\) and \(\dot{d}\) factored out, producing:
 \[
 J =
 \begin{bmatrix}
-    \tensor*[^{0}]{\omega}{^{T}_{2}}  \over {\dot{\theta}_{1}}   \\
-    \tensor*[^{0}]{v}{^{T}_{2}} \over \dot{d}_{2}
+    \tensor*[^{0}]{\omega}{_{2}}  \over {\dot{\theta}_{1}}  &
+    \tensor*[^{0}]{v}{_{2}} \over \dot{d}_{2}
 \end{bmatrix} =
 \begin{bmatrix}
-    -a_{1}s_{1} - d_{2}c_{1} &  a_{1}c_{1} - d_{2}s_{1}  \\
-    -s_{1} 					 & c_{1}
+    -a_{1}s_{1} - d_{2}c_{1} & -s_{1} \\
+    a_{1}c_{1} - d_{2}s_{1}  & c_{1}
 \end{bmatrix}
 \]
 To compute the singularities, we use Equation (5.73) on p.152 in \cite{textbook}, which is as follows:
