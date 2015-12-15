@@ -122,12 +122,18 @@ To compute the Jacobian matrix, we need to obtain the derived angular and linear
     \dot{d}_{2}c_{1}
 \end{bmatrix}
 \]
-Now, to get the \(2 \times 2\) Jacobian matrix, we side stack the components with \(\dot{\theta}\) and \(\dot{d}\) factored out, producing:
+Now, to get the \(2 \times 2\) Jacobian matrix, we combine the components of \(\tensor*[^{0}]{\omega}{_{2}}\) and \(\tensor*[^{0}]{v}{_{2}}\) into a single matrix, and factor out \(\dot{\theta}\) and \(\dot{d}\) respectively, producing:
 \[
 J =
 \begin{bmatrix}
     \tensor*[^{0}]{\omega}{_{2}}  \over {\dot{\theta}_{1}}  &
     \tensor*[^{0}]{v}{_{2}} \over \dot{d}_{2}
+\end{bmatrix} =
+\begin{bmatrix}
+    {-\dot{\theta}a_{1}s_{1} - \dot{\theta}d_{2}c_{1}}\over{\dot{\theta}}  
+    &  - \dot{d}_{2}s_{1} \over{\dot{d}_{2}}\\
+    {\dot{\theta}a_{1}c_{1} - \dot{\theta}d_{2}s_{1}}\over{\dot{\theta}} 
+    & \dot{d}_{2}c_{1} \over{\dot{d}_{2}}
 \end{bmatrix} =
 \begin{bmatrix}
     -a_{1}s_{1} - d_{2}c_{1} & -s_{1} \\
@@ -152,7 +158,7 @@ d_{2} = 0
 \]
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Problem 2}
+\section*{Problem 2} %%COMPLETE%%
 \subsection*{Exercise 6.14}
 The following equations were derived for a 2-DOF RP manipulator:
 \[
