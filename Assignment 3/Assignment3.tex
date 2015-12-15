@@ -30,7 +30,7 @@
 \pagestyle{empty}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Problem 1}
+\section*{Problem 1} %%COMPLETE%%
 \subsection*{Exercise 5.13}
 A certain two-link manipulator has the follow Jacobian:
 \[
@@ -246,10 +246,15 @@ Thus, the starting position (\(d_i\)), final position (\(d_f\)), starting veloci
 \end{array}
 \]
 \pagebreak
-\section*{Problem 4}
+\section*{Problem 4} %%COMPLETE%%
 Assume that you have a mobile robot which is depicted as a point inside a room. A camera at the ceiling monitors the whole space and can track the robot and monitor the locations of the obstacles. The robot starts from an entrance at the left of the room and needs to reach an exit at the right of the room. There are two obstacles in its way. How are you going to quantize the space in order for the robot to avoid the obstacles? Can you design a planning mechanism for this case? Does this formulation change when the robot moves through a maze?
 \subsubsection*{Answer}
-\pagebreak
+
+In order to quantize the space for the robot to avoid obstacles, I would first have the camera capture the initial location of the robot. After doing this, I would then have the mobile robot move one unit forwards and stop.  I would then use the camera to capture the new location of the robot. This would provide a quantification of space in regards to linear motion for the robot.  The next step would involve having the mobile robot move backwards one unit and record the new location of the mobile robot. Next, I would have the mobile robot turn one unit to one side, move forward one unit, and record the new location. I would then proceed backward one unit and record the new position.  I would then repeat that cycle for a turn one unit to the opposite side.  I would then use these collection of points to compute linear units for each direction and rotational units for each side (which may be uneven, ex. one side may underturn/overturn), and relate them to the workspace (the room).  These units of movement could then be used to quantize the room in the mobile robot's movement units.
+
+It would be possible to create a planning mechanism for this case using a basic search algorithm that would grid the room into the mobile robot's units. One specific search algorithm that comes to mind is a simple Depth-First-Search (DFS).  How this algorithm would be employed is that it would search depth first (towards the exit).  Each time an obstacle is reached by the DFS, it would backtrack up a level and traverse a new possible branch (or, equivalently, grid path). Each node would be quantized similar to that of a grid with a simple two-value coordinate. This would be done until the search algorithm reached the goal, to which it would return the necessary ordered set of points that trace a path to the solution (the exit).
+
+This formulation would slightly change if the mobile robot had to go through a maze. With a maze, the grid should be aligned with the pathes through the maze. Also, the grid (if needed) should be properly scaled for the maze to decrease time-complexity to run the depth first search algorithm. For example, if the grid were not scaled to align one line on the paths through the maze, then it's possible that two or more grid paths could exist on the same path in the maze.  This would cause possible redundancy for the depth first search would increase run-time. This would not be optimal. Therefore, the formulation would be slightly altered to account for this different workspace.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%REFERENCES%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{IEEEtran}
