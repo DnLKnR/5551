@@ -166,17 +166,19 @@ The following equations were derived for a 2-DOF RP manipulator:
 \]
 Some of the terms are obviously incorrect. Indicate the incorrect terms.
 \subsubsection*{Answer}
-Both \(\tau_{1}\) and \(\tau_{2}\) should be similar to Equation (6.88) on p.185 in \cite{textbook} since they were also derived for an RP manipulator. This also means that they can be used as a reference to correct the provided equations in Exercise 6.14. First, we know that \(l_{1}\) must translate to \(d_{1}\). Second, through some comparison, we can see that \(d_{2}\) maps directly from Equation (6.88). \\ \\
+Both \(\tau_{1}\) and \(\tau_{2}\) should be similar to Equation (6.88) on p.185 in \cite{textbook} since they were also derived for an RP manipulator. This also means that they can be used as a reference to correct the provided equations in Exercise 6.14. \\ \\
 For \(\tau_{1}\):
 \begin{enumerate}
-\item Term \(- m_{2}d_{2}\dot{\theta}^2\) contains the variable \(\dot{\theta}^2\), which is missing a subscript.
+\item Term \(m_{1}(d^{2}_{1} + d_{2})\ddot{\theta}_1\) contains the addition of \(d_{1}\) squared added to \(d_{2}\), which is incorrect. The correct term to replace this one would be \(m_{1}d^{2}_{1}\ddot{\theta}_1\).
+\item Term \(g cos(\theta_{1})[m_{1}(d_{1} + d_{2}\dot{\theta}_{1}) + m_{2}(d_{2} + \dot{d}_{2})]\) should only contain the multiplication of \(m_{1}\) to \(d_{1}\) and \(m_{2}\) to \(d_{2}\). The torgue from gravity does not have, nor need, components for rotational velocity (denoted as \(\dot{\theta}\)) or linear velocity (denoted as \(\dot{d}\)). The correct term to replace this one would be \(g cos(\theta_{1})[m_{1}d_{1} + m_{2}d_{2}]\).
+\item This equation contains no inertia tensor matrix variables, which does not make sense since rotational inertia exists in a RP manipulator.
 \end{enumerate}
 For \(\tau_{2}\):
 \begin{enumerate}
 \item Term \(- m_{2}d_{2}\dot{\theta}^2\) contains the variable \(\dot{\theta}^2\), which is missing a subscript.
-\item Term \(m_{1}\dot{d}_{2}\ddot{\theta}_{1}\) is incorrect, since \(\tau_{2}\) should not contain value \(m_{1}\).
-\item Term \(- m_{1}d_{1}\dot{d}_2\) is incorrect, since \(\tau_{2}\) should not contain value \(m_{1}\).
-\item Term \(m_{2}(d_{2} + 1)g sin(\theta_{1})\) should be \(m_{2}g sin(\theta_{1})\)
+\item The double derivative of \(\theta\) (which is denoted as \(\ddot{\theta}\)) should not a part of this equation. In relation to this, term \(m_{1}\dot{d}_{2}\ddot{\theta}_{1}\) should be completely removed from this equation.
+\item The values \(m_{1}\) and \(d_{1}\) should not be present in the equation of torque with respects to the second link. In relation to this, term \(m_{1}d_{1}\dot{d}_2\) should be completely removed from this equation.
+\item Term \(m_{2}(d_{2} + 1)g sin(\theta_{1})\) should be \(m_{2}g sin(\theta_{1})\).
 \end{enumerate}
 \pagebreak
 \section*{Problem 3} %%COMPLETE%%
