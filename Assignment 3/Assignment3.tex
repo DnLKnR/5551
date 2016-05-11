@@ -1,0 +1,270 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{cite}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{gensymb}
+\usepackage{tensor}
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{verbatim}
+\usepackage[caption=false,font=footnotesize,subrefformat=parens,labelformat=parens]
+{subfig}
+\graphicspath{{graphics/}}
+\DeclareGraphicsExtensions{.png}
+\title{\bf Assignment \#3
+}
+
+\author{\parbox{4 in}{\centering Introduction to Intelligent Robotic Systems}\\
+  CSCI 5551\\ \\
+  Daniel Koniar\\
+  {\tt\small \{konia013\}@umn.edu}\\
+}  
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 1} %%COMPLETE%%
+\subsection*{Exercise 5.13}
+A certain two-link manipulator has the follow Jacobian:
+\[
+\tensor*[^{0}]{J(\Theta)}{} =
+\begin{bmatrix}
+    -l_{1}s_{1} - l_{2}s_{12}    & -l_{2}s_{12}   \\
+    l_{1}c_{1}+l_{2}c_{12}      & l_{2}c_{12}
+\end{bmatrix}
+\]
+Ignoring gravity, what are the joint torques required in order that the manipulator will apply a static force vector \(\tensor*[^{0}]{F}{} = 10 \hat{X_{0}}\).
+\subsubsection*{Answer}
+To solve this problem, we will use Equation (5.97) on p.157 in \cite{textbook}, which is as follows:
+\[
+\tau = \tensor*[^{0}]{J}{^T} \tensor*[^{0}]{F}{}
+\]
+Next, we set up the values (Note: Since the manipulator only has 2-DOF, the \(\hat{X_{0}}\) vector only contains an \(x\) and \(y\) component):
+\[
+\tensor*[^{0}]{J}{^T} = 
+\begin{bmatrix}
+    -l_{1}s_{1} - l_{2}s_{12}    & -l_{2}s_{12}   \\
+    l_{1}c_{1}+l_{2}c_{12}      & l_{2}c_{12}
+\end{bmatrix}^T
+=
+\begin{bmatrix}
+    -l_{1}s_{1} - l_{2}s_{12}    & l_{1}c_{1}+l_{2}c_{12}    \\
+    -l_{2}s_{12}     & l_{2}c_{12}
+\end{bmatrix},
+\tensor*[^{0}]{F}{} =
+10\hat{X_{0}} =
+10
+\begin{bmatrix}
+    1     \\
+    0     \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    10     \\
+    0     \\
+\end{bmatrix}
+\]
+Now, we can enter the values above into our equation and solve \(\tau\), which can be seen in the following:
+\[
+\tau = 
+\begin{bmatrix}
+    -l_{1}s_{1} - l_{2}s_{12}    & l_{1}c_{1}+l_{2}c_{12}    \\
+    -l_{2}s_{12}     & l_{2}c_{12}
+\end{bmatrix}
+\begin{bmatrix}
+    10     \\
+    0     \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    -10 l_{1}s_{1} - 10 l_{2}s_{12}     \\
+    -10 l_{2}s_{12}    \\
+\end{bmatrix}
+\]
+Thus, the joint torques required in order for the manipulator to apply a static force vector \(\tensor*[^{0}]{F}{} = 10 \hat{X_{0}}\) is as follows:
+\[
+\tau = 
+\begin{bmatrix}
+    -10 l_{1}s_{1} - 10 l_{2}s_{12}     \\
+    -10 l_{2}s_{12}    \\
+\end{bmatrix}
+\]
+\pagebreak
+\subsection*{Exercise 5.19}
+The position of the origin of link 2 for an RP manipulator is given by
+\[
+\tensor*[^{0}]{P}{_{2ORG}} =
+\begin{bmatrix}
+    a_{1}c_{1} - d_{2}s_{1}     \\
+    a_{1}s_{1} + d_{2}c_{1}     \\
+    0
+\end{bmatrix}
+\]
+Give the \(2 \times 2\) Jacobian that relates the two joint rates to the linear velocity of the origin of frame {2}. Give a value of \(\Theta\) where the device is at a singularity.
+\subsubsection*{Answer}
+To compute the Jacobian matrix, we need to obtain the derived angular and linear components of \(\tensor*[^{0}]{P}{_{2ORG}}\) with respects to \(\dot{\theta}\) and \(\dot{d}\), respectively.  To do this, we derive for \({d}\over{d\theta}\) to find \(\omega\) and for \({d}\over{dd}\) to find \(v\), which produces the following (Note: The Z-component is removed since the manipulator only contains 2-DOF):
+\[
+\tensor*[^{0}]{\omega}{_{2}} =
+\begin{bmatrix}
+    -\dot{\theta}a_{1}s_{1} - \dot{\theta}d_{2}c_{1}     \\
+    \dot{\theta}a_{1}c_{1} - \dot{\theta}d_{2}s_{1}
+\end{bmatrix},
+\tensor*[^{0}]{v}{_{2}} =
+\begin{bmatrix}
+    - \dot{d}_{2}s_{1}     \\
+    \dot{d}_{2}c_{1}
+\end{bmatrix}
+\]
+Now, to get the \(2 \times 2\) Jacobian matrix, we combine the components of \(\tensor*[^{0}]{\omega}{_{2}}\) and \(\tensor*[^{0}]{v}{_{2}}\) into a single matrix, and factor out \(\dot{\theta}\) and \(\dot{d}\) respectively, producing:
+\[
+J =
+\begin{bmatrix}
+    \tensor*[^{0}]{\omega}{_{2}}  \over {\dot{\theta}_{1}}  &
+    \tensor*[^{0}]{v}{_{2}} \over \dot{d}_{2}
+\end{bmatrix} =
+\begin{bmatrix}
+    {-\dot{\theta}a_{1}s_{1} - \dot{\theta}d_{2}c_{1}}\over{\dot{\theta}}  
+    &  - \dot{d}_{2}s_{1} \over{\dot{d}_{2}}\\
+    {\dot{\theta}a_{1}c_{1} - \dot{\theta}d_{2}s_{1}}\over{\dot{\theta}} 
+    & \dot{d}_{2}c_{1} \over{\dot{d}_{2}}
+\end{bmatrix} =
+\begin{bmatrix}
+    -a_{1}s_{1} - d_{2}c_{1} & -s_{1} \\
+    a_{1}c_{1} - d_{2}s_{1}  & c_{1}
+\end{bmatrix}
+\]
+To compute the singularities, we use Equation (5.73) on p.152 in \cite{textbook}, which is as follows:
+\[DET[J(\Theta)] = 0\]
+Thus, we compute the determinant of the \(2 \times 2\) Jacobian matrix, set it equal to 0, and solve for each value, seen in the following:
+\[
+-c_{1}^2d_{2} - a_{1}s_{1}c_{1} + a_{1}s_{1}c_{1} - d_{2}s_{1}^2 = 0
+\]
+\[
+-d_{2}(c_{1}^2 + s_{1}^2) = 0
+\]
+\[
+-d_{2} = 0
+\]
+Thus, a singularity exists in the RP Manipulator when the following is true:
+\[
+d_{2} = 0
+\]
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 2} %%COMPLETE%%
+\subsection*{Exercise 6.14}
+The following equations were derived for a 2-DOF RP manipulator:
+\[
+\begin{array}{l}
+    \tau_{1} = m_{1}(d^{2}_{1} + d_{2})\ddot{\theta}_1 + 
+				m_{2} d^{2}_{2}\ddot{\theta}_{1} + 
+				2m_{2}d_{2}\dot{d}_{2}\dot{\theta}_{1} +
+				g cos(\theta_{1})[m_{1}(d_{1} + d_{2}\dot{\theta}_{1}) + m_{2}(d_{2} + \dot{d}_{2})]\\ \\
+    \tau_{2} = m_{1}\dot{d}_{2}\ddot{\theta}_{1} + m_{2}\ddot{d}_{2} - m_{1}d_{1}\dot{d}_2 - m_{2}d_{2}\dot{\theta}^2 + m_{2}(d_{2} + 1)g sin(\theta_{1})
+\end{array}
+\]
+Some of the terms are obviously incorrect. Indicate the incorrect terms.
+\subsubsection*{Answer}
+Both \(\tau_{1}\) and \(\tau_{2}\) should be similar to Equation (6.88) on p.185 in \cite{textbook} since they were also derived for an RP manipulator. This also means that they can be used as a reference to correct the provided equations in Exercise 6.14. \\ \\
+For \(\tau_{1}\):
+\begin{enumerate}
+\item Term \(m_{1}(d^{2}_{1} + d_{2})\ddot{\theta}_1\) contains the addition of \(d_{1}\) squared added to \(d_{2}\), which is incorrect. The correct term to replace this one would be \(m_{1}d^{2}_{1}\ddot{\theta}_1\).
+\item Term \(g cos(\theta_{1})[m_{1}(d_{1} + d_{2}\dot{\theta}_{1}) + m_{2}(d_{2} + \dot{d}_{2})]\) should only contain the multiplication of \(m_{1}\) to \(d_{1}\) and \(m_{2}\) to \(d_{2}\). The torgue from gravity does not have, nor need, components for rotational velocity (denoted as \(\dot{\theta}\)) or linear velocity (denoted as \(\dot{d}\)). The correct term to replace this one would be \(g cos(\theta_{1})[m_{1}d_{1} + m_{2}d_{2}]\).
+\item This equation contains no inertia tensor matrix variables, which does not make sense since rotational inertia exists in a RP manipulator.
+\end{enumerate}
+For \(\tau_{2}\):
+\begin{enumerate}
+\item Term \(- m_{2}d_{2}\dot{\theta}^2\) contains the variable \(\dot{\theta}^2\), which is missing a subscript.
+\item The double derivative of \(\theta\) (which is denoted as \(\ddot{\theta}\)) should not a part of this equation. In relation to this, term \(m_{1}\dot{d}_{2}\ddot{\theta}_{1}\) should be completely removed from this equation.
+\item The values \(m_{1}\) and \(d_{1}\) should not be present in the equation of torque with respects to the second link. In relation to this, term \(m_{1}d_{1}\dot{d}_2\) should be completely removed from this equation.
+\item Term \(m_{2}(d_{2} + 1)g sin(\theta_{1})\) should be \(m_{2}g sin(\theta_{1})\).
+\end{enumerate}
+\pagebreak
+\section*{Problem 3} %%COMPLETE%%
+\subsection*{Exercise 7.17}
+A single cubic trajectory is given by \\
+\[
+\theta(t) = 10 + 90t^2 - 60t^3
+\]
+\\
+and is used over the time interval from \(t = 0\) to \(t = 1\). What are the starting and final positions, velocities, and accelerations?
+\subsubsection*{Answer}
+To get the starting position, we solve for \(\theta(t)\), when \(t = 0\):
+\[\theta(0) = 10 + 90(0)^2 - 60(0)^3 = 10\]
+To get the final position, we solve for \(\theta(t)\), when \(t = 1\):
+\[\theta(1) = 10 + 90(1)^2 - 60(1)^3 = 40\]
+An order to obtain velocity, \(\dot{\theta}(t)\) will need to be computed by taking the derivative of \(\theta(t)\), which produces:
+\[\dot{\theta}(t) = 180t - 180t^2\]
+To get the starting velocity, we solve for \(\dot{\theta}(t)\), when \(t = 0\):
+\[\dot{\theta}(0) = 180(0) - 180(0)^2 = 0\]
+To get the final velocity, we solve for \(\dot{\theta}(t)\), when \(t = 1\):
+\[\dot{\theta}(1) = 180(1) - 180(1)^2 = 0\]
+An order to obtain acceleration, \(\ddot{\theta}(t)\) will need to be computed by taking the derivative of \(\dot{\theta}(t)\), which produces:
+\[\ddot{\theta}(t) = 180 - 360t\]
+To get the starting acceleration, we solve for \(\ddot{\theta}(t)\), when \(t = 0\):
+\[\ddot{\theta}(0) = 180 - 360(0) = 180\]
+To get the final acceleration, we solve for \(\ddot{\theta}(t)\), when \(t = 1\):
+\[\ddot{\theta}(1) = 180 - 360(1) = -180\]
+Thus, the starting position (\(d_i\)), final position (\(d_f\)), starting velocity (\(v_i\)), final velocity (\(v_f\)), starting acceleration (\(a_i\)), and final acceleration (\(a_f\)) are:
+\[
+\begin{array}{lrllr}
+    d_i = &10 &,& d_f = &40  \\
+    v_i = &0  &,& v_f = &0   \\
+    a_i = &180 &,& a_f = &-180 \\
+\end{array}
+\]
+\pagebreak
+\subsection*{Exercise 7.18}
+A single cubic trajectory is given by \\
+\[
+\theta(t) = 10 + 90t^2 - 60t^3
+\]
+\\
+and is used over the time interval from \(t = 0\) to \(t = 2\). What are the starting and final positions, velocities, and accelerations?
+\subsubsection*{Answer}
+To get the starting position, we solve for \(\theta(t)\), when \(t = 0\):
+\[\theta(0) = 10 + 90(0)^2 - 60(0)^3 = 10\]
+To get the final position, we solve for \(\theta(t)\), when \(t = 2\):
+\[\theta(2) = 10 + 90(2)^2 - 60(2)^3 = -110\]
+An order to obtain velocity, \(\dot{\theta}(t)\) will need to be computed by taking the derivative of \(\theta(t)\), which produces:
+\[\dot{\theta}(t) = 180t - 180t^2\]
+To get the starting velocity, we solve for \(\dot{\theta}(t)\), when \(t = 0\):
+\[\dot{\theta}(0) = 180(0) - 180(0)^2 = 0\]
+To get the final velocity, we solve for \(\dot{\theta}(t)\), when \(t = 2\):
+\[\dot{\theta}(2) = 180(2) - 180(2)^2 = -360\]
+An order to obtain acceleration, \(\ddot{\theta}(t)\) will need to be computed by taking the derivative of \(\dot{\theta}(t)\), which produces:
+\[\ddot{\theta}(t) = 180 - 360t\]
+To get the starting acceleration, we solve for \(\ddot{\theta}(t)\), when \(t = 0\):
+\[\ddot{\theta}(0) = 180 - 360(0) = 180\]
+To get the final acceleration, we solve for \(\ddot{\theta}(t)\), when \(t = 2\):
+\[\ddot{\theta}(2) = 180 - 360(2) = -540\]
+Thus, the starting position (\(d_i\)), final position (\(d_f\)), starting velocity (\(v_i\)), final velocity (\(v_f\)), starting acceleration (\(a_i\)), and final acceleration (\(a_f\)) are:
+\[
+\begin{array}{lrllr}
+    d_i = &10 &,& d_f = &-110  \\
+    v_i = &0  &,& v_f = &-360  \\
+    a_i = &180 &,& a_f = &-540 \\
+\end{array}
+\]
+\pagebreak
+\section*{Problem 4} %%COMPLETE%%
+Assume that you have a mobile robot which is depicted as a point inside a room. A camera at the ceiling monitors the whole space and can track the robot and monitor the locations of the obstacles. The robot starts from an entrance at the left of the room and needs to reach an exit at the right of the room. There are two obstacles in its way. How are you going to quantize the space in order for the robot to avoid the obstacles? Can you design a planning mechanism for this case? Does this formulation change when the robot moves through a maze?
+\subsubsection*{Answer}
+
+In order to quantize the space for the robot to avoid obstacles, I would first have the camera capture the initial location of the robot. After doing this, I would then have the mobile robot move one unit forwards and stop.  I would then use the camera to capture the new location of the robot. This would provide a quantification of space in regards to linear motion for the robot.  The next step would involve having the mobile robot move backwards one unit and record the new location of the mobile robot. Next, I would have the mobile robot turn one unit to one side, move forward one unit, and record the new location. I would then proceed backward one unit and record the new position.  I would then repeat that cycle for a turn one unit to the opposite side.  I would then use these collection of points to compute linear units for each direction and rotational units for each side (which may be uneven, ex. one side may underturn/overturn), and relate them to the workspace (the room).  These units of movement could then be used to quantize the room in the mobile robot's movement units.
+
+It would be possible to create a planning mechanism for this case using a basic search algorithm that would grid the room into the mobile robot's units. One specific search algorithm that comes to mind is a simple Depth-First-Search (DFS).  How this algorithm would be employed is that it would search depth first (towards the exit).  Each time an obstacle is reached by the DFS, it would backtrack up a level and traverse a new possible branch (or, equivalently, grid path). Each node would be quantized similar to that of a grid with a simple two-value coordinate. This would be done until the search algorithm reached the goal, to which it would return the necessary ordered set of points that trace a path to the solution (the exit).
+
+This formulation would slightly change if the mobile robot had to go through a maze. With a maze, the grid should be aligned with the pathes through the maze. Also, the grid (if needed) should be properly scaled for the maze to decrease time-complexity to run the depth first search algorithm. For example, if the grid were not scaled to align one line on the paths through the maze, then it's possible that two or more grid paths could exist on the same path in the maze.  This would cause possible redundancy for the depth first search would increase run-time. This would not be optimal. Therefore, the formulation would be slightly altered to account for this different workspace.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%REFERENCES%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,Assignment3}
+\end{document}

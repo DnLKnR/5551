@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ## Extra latex documents that should not be added
+=======
+# LaTeX files
+>>>>>>> 5551-HW
 *.aux
 *.glo
 *.idx
@@ -25,7 +29,7 @@
 *.bak
 *.pdf
 *.odt
-*~
 ## Project information from Eclipse
 *.project
 *.pydevproject
+*.pdf
